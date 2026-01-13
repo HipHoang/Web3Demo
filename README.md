@@ -1,34 +1,54 @@
 # MessageStorage DApp
 
-A simple decentralized application (DApp) built on Ethereum Sepolia testnet.
-Users can read and update a message stored on-chain via MetaMask.
+A simple decentralized application (DApp) built on the Ethereum Sepolia testnet.  
+This project demonstrates end-to-end Web3 development with smart contracts, frontend integration, and blockchain interaction using MetaMask.
 
-## Tech Stack
-- Solidity
-- Ethereum (Sepolia testnet)
-- Ethers.js v6
-- React
-- MetaMask
+🔗 **Live Demo**: https://web3-demo-gbqz6u33q-hieps-projects-89f6fbff.vercel.app/
 
-## Smart Contract
-- Network: Sepolia
-- Contract Address: 0xF53eEF001a11A0BcD4321d55e958F2ff87C46Ec2
-- Etherscan: https://sepolia.etherscan.io/address/0xF53eEF001a11A0BcD4321d55e958F2ff87C46Ec2
+---
 
-### Contract Features
-- Store a message on-chain
-- Track last sender address
-- Track last updated timestamp
+## ⚙️ Tech Stack
 
-## Frontend Features
-- Connect MetaMask wallet
-- Read message from blockchain
-- Write message to blockchain
-- Network validation (Sepolia only)
+- **Smart Contract:** Solidity (MessageStorage.sol)
+- **Blockchain:** Ethereum Sepolia Testnet
+- **Frontend:** React
+- **Web3 Library:** ethers.js v6
+- **Wallet Integration:** MetaMask
+- **Deployment:** Vercel
+- **Explorer:** Sepolia Etherscan
 
-## How to Run Locally
+---
 
-```bash
-cd frontend
-npm install
-npm start
+## 🧠 Project Overview
+
+This DApp allows users to:
+
+- Connect a MetaMask wallet
+- Read a message stored on the blockchain
+- Update the message (transaction on Sepolia testnet)
+- Display who updated the message and when
+
+The app demonstrates a standard Web3 flow:
+> Frontend → Provider/Signer → Contract → Blockchain
+
+---
+
+## 🧱 Smart Contract
+
+### Contract: `MessageStorage.sol`
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract MessageStorage {
+    string public message;
+    address public lastSender;
+    uint256 public lastUpdatedAt;
+
+    function setMessage(string memory _message) public {
+        message = _message;
+        lastSender = msg.sender;
+        lastUpdatedAt = block.timestamp;
+    }
+}
